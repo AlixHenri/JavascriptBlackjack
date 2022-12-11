@@ -1,15 +1,25 @@
-let firstCard = getRandomCard()
-let secondCard = getRandomCard()
-let cards = [firstCard, secondCard]
-
-let sumCard = firstCard + secondCard
+let cards = []
+let sumCard = 0
 let hasBlackJack = false
 let isAlive = true
 let messageEl = document.getElementById('message-el')
 let sumEl = document.querySelector('#sum-el')
 let cardsEl = document.querySelector('#cards-el')
 
+let player = {
+    name: "Per",
+    chips: 200
+}
+
+let playerEl = document.querySelector('#player-el')
+playerEl.textContent = player.name + ": $" + player.chips
+
 function startGame(){
+    isAlive = true
+    let firstCard = getRandomCard()
+    let secondCard = getRandomCard()
+    cards = [firstCard, secondCard]
+    sumCard = firstCard + secondCard
     renderGame()
 }
 
@@ -42,11 +52,13 @@ function getRandomCard(){
 }
 
 function newCard(){
-    console.log("Drawing a new card from the deck")
-    let card = getRandomCard()
-    sumCard += card
-    cards.push(card)
-    renderGame()
+    if(isAlive === true && hasBlackJack === false){
+        console.log("Drawing a new card from the deck")
+        let card = getRandomCard()
+        sumCard += card
+        cards.push(card)
+        renderGame()
+    }
 }
 
 //Still in the game
